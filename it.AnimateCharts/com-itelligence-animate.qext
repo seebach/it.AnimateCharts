@@ -1,0 +1,9 @@
+{
+	"name" : "it.AnimateCharts",
+	"description" : "Animates Dashboard Based on a Dimension",
+	"icon" : "extension",
+	"type" : "visualization",
+	"version": "0.1",
+	"preview" : "tool",
+	"author": "Torben Seebach itelligence Nordic"
+}
