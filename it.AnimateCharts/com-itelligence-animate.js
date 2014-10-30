@@ -138,7 +138,7 @@ define(["jquery","./com-itelligence-animate-properties"],
 				      } else {
 						this.running = 0;
 				      }                        //  ..  setTimeout()
-				   }, 1500)
+				   }, 500)
 				}
 
 				 // i use this logging function so its easy to turn logging on or off
