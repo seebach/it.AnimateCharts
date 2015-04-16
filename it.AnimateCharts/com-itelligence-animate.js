@@ -3,7 +3,9 @@
 	ToDo:
 	Extension that loops a dimension and animates the rest of the sheet
 */
-define(["jquery","text!./styles.css","./com-itelligence-animate-properties"], function($, cssProperties,properties) {
+
+
+define(["jquery","qlik","text!./styles.css","./com-itelligence-animate-properties"], function($,qlik, cssProperties,properties) {
 	'use strict';$("<style>").html(cssProperties).appendTo("head");
 var runCount = 1;
 var timer;
@@ -25,6 +27,10 @@ return {
 	},
 	
 	paint : function($element, layout) { 
+
+		// use the external protocol to get selections of values
+		log(qlik);
+		var app = qlik.currApp();
 
 		var valueArray = [];
 		var i = 0;
@@ -61,21 +67,22 @@ return {
 			var count = 0;
 			
 			var qData = layout.qHyperCube.qDataPages[0];
+			var qField = layout.qHyperCube.qDimensionInfo[0].qGroupFieldDefs[0];
 
 			$.each(qData.qMatrix, function(key, row) {  						
 		
 				// log loop into rows
 				$.each(row, function(index, cell) {
-					// handle text values
-					if(isNaN(row[0].qText)) {
-						valueArray.push(row[0].qText);
-						log ('text'+row[0].qText);
-					} 
 					// handle numbers
 					if(isNaN(row[0].qNum)===false) {
 						valueArray.push(row[0].qNum);
 						log (row[0].qNum);
-					} 	
+					} // handle text values					 
+					else if(isNaN(row[0].qText)) {
+						valueArray.push(row[0].qText);
+						log ('text'+row[0].qText);
+					} 
+	
 				});
 				count = count+1;							
 			});			
@@ -99,7 +106,11 @@ return {
 			    log('setTimeout loop '+i);
 			    log(valueArray[i]);
 			    log(_this.backendApi)
-			      _this.backendApi.selectValues(0,[i],false);
+			    log(qField)
+			    app.field(qField).clear();
+			    app.field(qField).selectValues([valueArray[i]], true, true);
+//			      _this.backendApi.selectValues(0,parseInt(valueArray[i]),false);
+//			      _this.backendApi.selectValues(0,[i],false);
 			   i++;
 		      _this.i = i;                     //  increment the counter
 		      if (i < arrayLength) { 
@@ -115,7 +126,7 @@ return {
 
 		 // i use this logging function so its easy to turn logging on or off
 		 function log(obj) {
-				  console.log(obj);
+		//		  console.log(obj);
 			};
 		}
 	}
