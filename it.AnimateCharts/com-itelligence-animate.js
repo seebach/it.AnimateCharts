@@ -5,13 +5,9 @@
 */
 
 
-<<<<<<< HEAD
 define(["jquery","qlik","text!./styles.css","text!./css/font-awesome.min.css","./com-itelligence-animate-properties"], function($,qlik, cssProperties,cssProperties2,properties) {
 	'use strict';$("<style>").html(cssProperties).appendTo("head");$("<style>").html(cssProperties2).appendTo("head");
-=======
-define(["jquery","qlik","text!./styles.css","./com-itelligence-animate-properties"], function($,qlik, cssProperties,properties) {
-	'use strict';$("<style>").html(cssProperties).appendTo("head");
->>>>>>> origin/master
+
 var runCount = 1;
 var timer;
 var i = 0;
@@ -139,17 +135,9 @@ return {
 					// handle numbers
 					if(isNaN(row[0].qNum)===false) {
 						valueArray.push(row[0].qNum);
-<<<<<<< HEAD
 					} // handle text values					 
 					else if(isNaN(row[0].qText)) {
 						valueArray.push(row[0].qText);
-=======
-						log (row[0].qNum);
-					} // handle text values					 
-					else if(isNaN(row[0].qText)) {
-						valueArray.push(row[0].qText);
-						log ('text'+row[0].qText);
->>>>>>> origin/master
 					} 
 	
 				});
@@ -175,20 +163,8 @@ return {
 			        //  create a loop function
 		   timer = setTimeout(function () {    //  call a 3s setTimeout when the loop is called
 			    log(valueArray[i]);
-<<<<<<< HEAD
 			    log(qField);
-=======
-			    log(_this.backendApi)
-			    log(qField)
->>>>>>> origin/master
-			    app.field(qField).clear();
-			    app.field(qField).selectValues([valueArray[i]], true, true);
-//			      _this.backendApi.selectValues(0,parseInt(valueArray[i]),false);
-//			      _this.backendApi.selectValues(0,[i],false);
-<<<<<<< HEAD
-              //  increment the counter
-=======
->>>>>>> origin/master
+
 			   i++;
 			   localStorage.animate_I = i;
 			   log('local i '+localStorage.animate_I);
